@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Movies from './components/Movies';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
@@ -14,7 +15,7 @@ class App extends Component {
 		return (
 			<React.Fragment>
 				<main className='container'>
-					<h1>Hello world</h1>
+					<Movies />
 				</main>
 			</React.Fragment>
 		);
