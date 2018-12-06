@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
+import Like from './common/like';
+
 import { getMovies } from '../services/fakeMovieService';
 
 class Movies extends Component {
 	state = { movies: getMovies() };
+
+	handleDelete(movie) {
+		const movies = this.state.movies.filter((m) => m._id !== movie._id);
+		this.setState({ movies });
+	}
+
+	handleLiked(movie) {
+		const movies = this.state.movies;
+		const movieIndex = movies.indexOf(movie);
+		movies[movieIndex].liked = !movies[movieIndex].liked;
+		this.setState({ movies });
+	}
+
 	render() {
 		const { length: count } = this.state.movies;
 
@@ -19,6 +34,7 @@ class Movies extends Component {
 							<th scope='col'>Genre</th>
 							<th scope='col'>Stock</th>
 							<th scope='col'>Rate</th>
+							<th scope='col'>Rate</th>
 							<th scope='col' />
 						</tr>
 					</thead>
@@ -30,6 +46,9 @@ class Movies extends Component {
 								<td>{movie.numberInStock}</td>
 								<td>{movie.dailyRentalRate}</td>
 								<td>
+									<Like liked={movie.liked} onLiked={() => this.handleLiked(movie)} />
+								</td>
+								<td>
 									<button className='btn btn-sm btn-danger' onClick={() => this.handleDelete(movie)}>
 										Delete
 									</button>
@@ -40,11 +59,6 @@ class Movies extends Component {
 				</table>
 			</React.Fragment>
 		);
-	}
-
-	handleDelete(movie) {
-		const movies = this.state.movies.filter((m) => m._id !== movie._id);
-		this.setState({ movies });
 	}
 }
 
