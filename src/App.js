@@ -4,9 +4,9 @@ import Movies from './components/movies';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faHeartSolid, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHeartRegular, faHeartSolid);
+library.add(faHeartRegular, faHeartSolid, faSortUp, faSortDown);
 
 class App extends Component {
 	state = {};
