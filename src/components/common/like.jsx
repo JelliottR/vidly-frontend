@@ -1,16 +1,16 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
 
-const Like = (props) => {
-	return (
-		<div>
-			<FontAwesomeIcon
-				icon={props.liked === true ? [ 'fas', 'heart' ] : [ 'far', 'heart' ]}
-				onClick={() => props.onLiked()}
-				style={{ cursor: 'pointer' }}
-			/>
-		</div>
-	);
+const Like = props => {
+  let classes = "fa fa-heart";
+  if (!props.liked) classes += "-o";
+  return (
+    <i
+      onClick={props.onClick}
+      style={{ cursor: "pointer" }}
+      className={classes}
+      aria-hidden="true"
+    />
+  );
 };
 
 export default Like;
