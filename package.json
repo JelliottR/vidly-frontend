@@ -21,6 +21,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
+		"mvbuild": "mv build ../../../../public_html/react/vidly",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
 	},
