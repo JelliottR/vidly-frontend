@@ -3,9 +3,6 @@ import Joi from 'joi-browser';
 import Form from './common/form';
 import auth from '../services/authService';
 import * as userService from './../services/userService';
-
-import { rootUrl } from '../config.json';
-
 class RegisterForm extends Form {
 	state = {
 		data: { username: '', password: '', name: '' },
@@ -24,7 +21,7 @@ class RegisterForm extends Form {
 			auth.loginWithJwt(response.headers['x-auth-token']);
 
 			//Full reload of the application to cause the App component to mount again.
-			window.location = rootUrl;
+			window.location = process.env.REACT_APP_SERVER_ROOT_URL;
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {
 				const errors = this.state.errors;

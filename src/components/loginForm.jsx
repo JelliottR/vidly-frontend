@@ -4,8 +4,6 @@ import Form from './common/form';
 import auth from '../services/authService';
 import { Redirect } from 'react-router-dom';
 
-import { rootUrl } from '../config.json';
-
 class LoginForm extends Form {
 	state = {
 		data: { username: '', password: '' },
@@ -25,7 +23,7 @@ class LoginForm extends Form {
 			//Full reload of the application to cause the App component to mount again.
 
 			const { state } = this.props.location;
-			window.location = state ? state.from.pathname : rootUrl;
+			window.location = state ? state.from.pathname : process.env.REACT_APP_SERVER_ROOT_URL;
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {
 				const errors = this.state.errors;
@@ -36,7 +34,7 @@ class LoginForm extends Form {
 	};
 
 	render() {
-		if (auth.getCurrentUser()) return <Redirect to='/' />;
+		if (auth.getCurrentUser()) return <Redirect to={process.env.REACT_APP_SERVER_ROOT_URL} />;
 
 		return (
 			<div>
