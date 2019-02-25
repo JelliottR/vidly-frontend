@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 
 ReactDOM.render(
-	<BrowserRouter basename="/react/vidly">
+	<BrowserRouter basename={process.env.REACT_APP_SERVER_ROOT_URL}>
 		<App />
 	</BrowserRouter>,
 	document.getElementById('root')
