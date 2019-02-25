@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import dotenv from 'dotenv';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 
+dotenv.config();
+
 ReactDOM.render(
-	<BrowserRouter basename='/react/vidly'>
+	<BrowserRouter basename="/react/vidly">
 		<App />
 	</BrowserRouter>,
 	document.getElementById('root')
