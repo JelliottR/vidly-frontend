@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/browser';
 
 function init() {
 	Sentry.init({
-		dsn: 'https://633185416717442db663e295ba6bf16d@sentry.io/1380363'
+		dsn: process.env.REACT_APP_SENTRY_DSN
 	});
 }
 
