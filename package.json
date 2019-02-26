@@ -21,7 +21,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"buildmv": "rm -R -f ../../../../public_html/react/vidly/* && cp build/* ../../../../public_html/react/vidly/",
+		"buildmv": "rm -R -f ../../../../public_html/react/vidly/* && cp -R -f build/* ../../../../public_html/react/vidly/",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
 	},
