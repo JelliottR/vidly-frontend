@@ -6,19 +6,19 @@ import { Redirect } from 'react-router-dom';
 
 class LoginForm extends Form {
 	state = {
-		data: { username: '', password: '' },
+		data: { email: '', password: '' },
 		errors: {}
 	};
 
 	schema = {
-		username: Joi.string().required().label('Username'),
+		email: Joi.string().required().email().label('Email'),
 		password: Joi.string().required().label('Password')
 	};
 
 	doSubmit = async () => {
 		try {
 			const { data } = this.state;
-			await auth.login(data.username, data.password);
+			await auth.login(data.email, data.password);
 
 			//Full reload of the application to cause the App component to mount again.
 
@@ -27,7 +27,7 @@ class LoginForm extends Form {
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {
 				const errors = this.state.errors;
-				errors.username = ex.response.data;
+				errors.email = ex.response.data;
 				this.setState({ errors });
 			}
 		}
@@ -40,7 +40,7 @@ class LoginForm extends Form {
 			<div>
 				<h1>Login</h1>
 				<form onSubmit={this.handleSubmit}>
-					{this.renderInput('username', 'Username')}
+					{this.renderInput('email', 'Email')}
 					{this.renderInput('password', 'Password', 'password')}
 					{this.renderButton('Login')}
 				</form>
