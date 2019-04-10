@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import Movies from './components/movies';
 import MovieForm from './components/movieForm';
 import Customers from './components/customers';
+import CustomerForm from './components/customerForm';
 import Rentals from './components/rentals';
 import NotFound from './components/notFound';
 import NavBar from './components/navBar';
@@ -38,6 +39,7 @@ class App extends Component {
 						<Route path='/logout' component={Logout} />
 						<ProtectedRoute path='/movies/:id' component={MovieForm} />
 						<Route path='/movies' render={(props) => <Movies {...props} user={user} />} />
+						<Route path='/customers/:id' component={CustomerForm} />
 						<Route path='/customers' component={Customers} />
 						<Route path='/rentals' component={Rentals} />
 						<Route path='/not-found' component={NotFound} />
