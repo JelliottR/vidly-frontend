@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import { getCustomer, saveCustomer } from "../services/customerService";
 import { toast } from "react-toastify";
+import _ from "lodash";
 
 class CustomerForm extends Form {
   state = {
@@ -17,6 +18,7 @@ class CustomerForm extends Form {
     _id: Joi.string(),
     name: Joi.string()
       .required()
+      .min(2)
       .label("Name"),
     email: Joi.string()
       .required()
@@ -29,6 +31,7 @@ class CustomerForm extends Form {
 
       const { data: customer } = await getCustomer(customerId);
       this.setState({ data: this.mapToViewModel(customer) });
+      this.setState({ oldData: this.mapToViewModel(customer) });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         this.props.history.replace("/not-found");
@@ -50,12 +53,23 @@ class CustomerForm extends Form {
 
   doSubmit = async () => {
     try {
-      await saveCustomer(this.state.data);
+      if (!_.isEqual(this.state.data, this.state.oldData)) {
+        await saveCustomer(this.state.data);
+        toast.success(`${this.state.data.name}'s account has been updated.`);
+      }
       this.props.history.push("/customers");
-      toast.success(`${this.state.data.name}'s account has been updated.`);
     } catch (ex) {
-      if (ex.response && ex.response.status === 401) {
-        toast.error(`Sorry, you're not authorized for that.`);
+      if (ex.response) {
+        switch (ex.response.status) {
+          case 401:
+            toast.error(`Sorry, you're not authorized for that.`);
+            break;
+          case 400:
+            toast.error(`${ex.response.data}`);
+            break;
+          default:
+            break;
+        }
       }
     }
   };
