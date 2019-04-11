@@ -1,7 +1,9 @@
+import moment from "moment";
 import React, { Component } from "react";
 import auth from "../services/authService";
 import { Link } from "react-router-dom";
 import Table from "./common/table";
+import GlobalDef from "../utils/globalDefinitions";
 
 class CustomersTable extends Component {
   columns = [
@@ -13,7 +15,24 @@ class CustomersTable extends Component {
         <Link to={`/customers/${customer._id}`}>{customer.email}</Link>
       )
     },
-    { path: "joinDate", label: "Join Date" }
+    {
+      path: "createdAt",
+      label: "Join Date",
+      content: customer => (
+        <span>
+          {moment(customer.createdAt).format(GlobalDef("timeFormat"))}
+        </span>
+      )
+    },
+    {
+      path: "updatedAt",
+      label: "Updated At",
+      content: customer => (
+        <span>
+          {moment(customer.updatedAt).format(GlobalDef("timeFormat"))}
+        </span>
+      )
+    }
   ];
 
   deleteColumn = {
